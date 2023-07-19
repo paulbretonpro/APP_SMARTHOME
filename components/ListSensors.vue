@@ -16,7 +16,7 @@ const { pending, data: listSensors } = await useAsyncData(
 
 const lastUpdated = computed(() => {
   return listSensors.value.length > 0
-    ? listSensors.value[0]?.datetime
+    ? $dayjs(listSensors.value[0]?.datetime).format("HH:mm DD/MM/YYYY")
     : "No information";
 });
 
@@ -24,9 +24,7 @@ setInterval(() => (timer.value += 1), 10000);
 </script>
 <template>
   <div>
-    <div>
-      Last Update : {{ $dayjs(lastUpdated).format("HH:mm DD/MM/YYYY") }}
-    </div>
+    <div>Last Update : {{}}</div>
     <div>
       <div v-for="(sensor, index) in listSensors" :key="index">
         {{ sensor.temperature }}
