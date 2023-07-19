@@ -11,6 +11,11 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@types/node": "^18.16.19",
-    "nuxt": "^3.6.3"
+    "nuxt": "^3.6.3",
+    "prisma": "^5.0.0"
+  },
+  "dependencies": {
+    "@nuxtjs/supabase": "^0.3.8",
+    "@prisma/client": "^5.0.0"
   }
 }
