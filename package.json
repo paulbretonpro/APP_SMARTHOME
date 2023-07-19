@@ -2,7 +2,7 @@
   "name": "nuxt-app",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "build": "prisma generate & nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -11,7 +11,9 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@types/node": "^18.16.19",
+    "dayjs": "^1.11.9",
     "nuxt": "^3.6.3",
+    "prettier": "3.0.0",
     "prisma": "^5.0.0"
   },
   "dependencies": {

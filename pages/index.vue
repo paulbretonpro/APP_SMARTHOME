@@ -1,0 +1,3 @@
+<template>
+  <ListSensors></ListSensors>
+</template>
