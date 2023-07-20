@@ -24,7 +24,7 @@ setInterval(() => (timer.value += 1), 10000);
 </script>
 <template>
   <div>
-    <div>Last Update : {{}}</div>
+    <div>Last Update : {{ lastUpdated }}</div>
     <div>
       <div v-for="(sensor, index) in listSensors" :key="index">
         {{ sensor.temperature }}
