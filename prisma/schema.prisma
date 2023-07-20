@@ -11,16 +11,16 @@ datasource db {
 }
 
 model Sensor {
-  id Int @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   temperature Float
-  humidity Float
-  datetime DateTime @default(now())
+  humidity    Float
+  datetime    DateTime @default(now())
 }
 
 model Weather {
-  id Int @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   temperature Float
-  wind Float
-  humidity Float
-  datetime DateTime @default(now())
+  wind        Float
+  humidity    Float
+  datetime    DateTime @default(now())
 }
