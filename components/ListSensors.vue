@@ -20,7 +20,7 @@ const lastUpdated = computed(() => {
     : "No information";
 });
 
-setInterval(() => (timer.value += 1), 10000);
+setInterval(() => (timer.value += 1), 5 * 60 * 1000);
 </script>
 <template>
   <div>

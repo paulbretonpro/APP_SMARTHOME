@@ -5,6 +5,7 @@ export default defineEventHandler(async () => {
     orderBy: {
       datetime: "desc",
     },
+    take: 10,
   });
   return data;
 });
