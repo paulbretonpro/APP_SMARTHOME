@@ -5,8 +5,8 @@ export default defineEventHandler(async (event) => {
 
   return await dbClient.weather.create({
     data: {
-      humidity: humidity,
       temperature: temperature,
+      humidity: humidity,
       wind: wind,
     },
   });

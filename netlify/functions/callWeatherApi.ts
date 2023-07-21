@@ -24,19 +24,25 @@ const myHandler: Handler = async (
 
     const data = await response.json();
     console.log("API Weather Response:", data);
+    console.log("Temp: ", data.temp);
+    console.log("Humidity: ", data.humidity);
+    console.log("Wind: ", data.wind_speed);
 
-    const responseApp = await fetch("/api/weather", {
-      method: "POST",
-      body: {
-        temperature: data.temp,
-        humidity: data.humidity,
-        wind: data.wind_speed,
-      },
-    });
+    const responseApp = await fetch(
+      "https://smarthome-sensors.netlify.app/api/weather",
+      {
+        method: "POST",
+        body: {
+          temperature: data.temp,
+          humidity: data.humidity,
+          wind: data.wind_speed,
+        },
+      }
+    );
 
     if (!responseApp.ok) {
       throw new Error(
-        `API SMARTHOME request failed with status: ${responseApp.status}`
+        `API SMARTHOME request failed with status: ${await responseApp.text()}`
       );
     }
 
