@@ -1,17 +1,15 @@
 <script setup lang="ts">
 const { $dayjs } = useNuxtApp();
-
+const { timer1min } = useRefreshData();
 interface ISensor {
   temperature: number;
   humidity: number;
 }
 
-const timer = ref<number>(0);
-
 const { pending, data: listSensors } = await useAsyncData(
   "sensors",
   () => $fetch("/api/sensor"),
-  { watch: [timer], default: () => [], lazy: true }
+  { watch: [timer1min], default: () => [], lazy: true }
 );
 
 const lastUpdated = computed(() => {
@@ -19,8 +17,6 @@ const lastUpdated = computed(() => {
     ? $dayjs(listSensors.value[0]?.datetime).format("HH:mm DD/MM/YYYY")
     : "No information";
 });
-
-setInterval(() => (timer.value += 1), 5 * 60 * 1000);
 </script>
 <template>
   <div>

@@ -1,4 +1,4 @@
-import dbClient from "../utils";
+import { dbClient } from "../utils";
 
 export default defineEventHandler(async (event) => {
   const { temperature, humidity } = await readBody(event);

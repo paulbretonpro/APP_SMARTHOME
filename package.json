@@ -17,7 +17,9 @@
     "prisma": "^5.0.0"
   },
   "dependencies": {
+    "@netlify/functions": "^1.6.0",
     "@nuxtjs/supabase": "^0.3.8",
-    "@prisma/client": "^5.0.0"
+    "@prisma/client": "^5.0.0",
+    "netlify-cli": "^15.9.1"
   }
 }
