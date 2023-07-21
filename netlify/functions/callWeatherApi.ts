@@ -24,19 +24,27 @@ const myHandler: Handler = async (
 
     const data = await response.json();
     console.log("API Weather Response:", data);
-    console.log("Temp: ", data.temp);
-    console.log("Humidity: ", data.humidity);
-    console.log("Wind: ", data.wind_speed);
+
+    const params = {
+      temperature: data.temp,
+      humidity: data.humidity,
+      wind: data.wind_speed,
+    };
 
     const responseApp = await fetch(
       "https://smarthome-sensors.netlify.app/api/weather",
       {
-        method: "POST",
-        body: {
-          temperature: data.temp,
-          humidity: data.humidity,
-          wind: data.wind_speed,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
         },
+        method: "POST",
+        body: Object.keys(params)
+          .map((key) => {
+            return (
+              encodeURIComponent(key) + "=" + encodeURIComponent(params[key])
+            );
+          })
+          .join("&"),
       }
     );
 
@@ -53,7 +61,6 @@ const myHandler: Handler = async (
       statusCode: 200,
     };
   } catch (error) {
-    console.error("Error fetching data from API:", error);
     return {
       statusCode: 500,
     };

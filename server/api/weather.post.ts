@@ -1,13 +1,13 @@
 import { dbClient } from "../utils";
 
 export default defineEventHandler(async (event) => {
-  const { humidity, temperature, wind } = await readBody(event);
-
-  return await dbClient.weather.create({
+  const body = await readBody(event);
+  const data = dbClient.weather.create({
     data: {
-      temperature: temperature,
-      humidity: humidity,
-      wind: wind,
+      humidity: parseFloat(body.humidity),
+      temperature: parseFloat(body.temperature),
+      wind: parseFloat(body.wind),
     },
   });
+  return data;
 });
