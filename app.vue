@@ -2,7 +2,7 @@
   <NuxtPage />
 </template>
 <script setup lang="ts">
-const { timer20min, hasAlrealdyValueThisHour } = useRefreshData();
+/*const { timer20min, hasAlrealdyValueThisHour } = useRefreshData();
 interface IWeather {
   id: number;
   temperature: number;
@@ -57,5 +57,5 @@ watch(timer20min, async () => {
   ) {
     await addNewWeather(22, 22, 22);
   }
-});
+});*/
 </script>
