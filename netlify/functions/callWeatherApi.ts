@@ -3,7 +3,7 @@ import { schedule } from "@netlify/functions";
 
 const fetch = require("node-fetch");
 
-const myHandler: Handler = async (
+const fetchWeatherApi: Handler = async (
   event: HandlerEvent,
   context: HandlerContext
 ) => {
@@ -67,6 +67,4 @@ const myHandler: Handler = async (
   }
 };
 
-const handler = schedule("@hourly", myHandler);
-
-export { handler };
+export { fetchWeatherApi };
