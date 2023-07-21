@@ -67,4 +67,6 @@ const fetchWeatherApi: Handler = async (
   }
 };
 
-export { fetchWeatherApi };
+const handler = schedule("@hourly", fetchWeatherApi);
+
+export { handler };
