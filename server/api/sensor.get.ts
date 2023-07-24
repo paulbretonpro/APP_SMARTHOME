@@ -1,11 +1,5 @@
-import { dbClient } from "../utils";
-
-export default defineEventHandler(async () => {
-  const data = await dbClient.sensor.findMany({
-    orderBy: {
-      datetime: "desc",
-    },
-    take: 10,
-  });
+export default defineEventHandler(async (event) => {
+  const params = getQuery(event);
+  const data = await $fetch(process.env.URL + "api/sensor", { params });
   return data;
 });

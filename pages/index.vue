@@ -1,3 +1,1 @@
-<template>
-  <ListSensors></ListSensors>
-</template>
+<template></template>
