@@ -19,15 +19,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import {
-  faCloud,
-  faGaugeHigh,
-  faHouseSignal,
-} from "@fortawesome/free-solid-svg-icons";
+import { TNavbarItem } from "types/navbar";
 
-const routes = [
-  { label: "Dashboard", path: "/", icon: faGaugeHigh },
-  { label: "Weather", path: "/weather", icon: faCloud },
-  { label: "Home sensor", path: "/house", icon: faHouseSignal },
-];
+defineProps<{
+  routes: TNavbarItem[];
+}>();
 </script>
