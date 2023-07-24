@@ -2,24 +2,30 @@
   "name": "nuxt-app",
   "private": true,
   "scripts": {
-    "build": "prisma generate & nuxt build",
+    "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@nuxt/devtools": "latest",
     "@types/node": "^18.16.19",
+    "autoprefixer": "^10.4.14",
     "dayjs": "^1.11.9",
     "nuxt": "^3.6.3",
+    "postcss": "^8.4.27",
     "prettier": "3.0.0",
-    "prisma": "^5.0.0"
+    "tailwindcss": "^3.3.3"
   },
   "dependencies": {
-    "@netlify/functions": "^1.6.0",
-    "@nuxtjs/supabase": "^0.3.8",
-    "@prisma/client": "^5.0.0",
-    "netlify-cli": "^15.9.1"
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/vue-fontawesome": "^3.0.3",
+    "@pinia/nuxt": "^0.4.11",
+    "pinia": "^2.1.4"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }
