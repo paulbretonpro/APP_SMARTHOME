@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between mb-8">
+  <div class="flex gap-4 justify-between mb-8">
     <div>
       <div class="font-bold text-3xl text-slate-800">Office sensor</div>
       <div class="text-slate-500">
