@@ -16,4 +16,18 @@ export const useSensorStore = defineStore("sensor", {
       }
     },
   },
+  getters: {
+    isActive: (state) => {
+      if (state.sensor.length > 0) {
+        const currentDate = new Date();
+        const lastRecord = new Date(state.sensor[0].datetime);
+        const differenceBetweenHour =
+          currentDate.getUTCHours() - lastRecord.getHours();
+
+        return { status: differenceBetweenHour === 0, lastUpdate: lastRecord };
+      } else {
+        return { status: false, lastUpdate: null };
+      }
+    },
+  },
 });
