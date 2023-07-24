@@ -8,7 +8,7 @@
               class="w-auto text-indigo-600 fa-xl"
               :icon="faUmbrella"
             ></FontAwesomeIcon>
-            <span class="ml-2 text-gray-600 font-extrabold">App smarthome</span>
+            <span class="ml-2 text-gray-600 font-extrabold">API smarthome</span>
           </div>
           <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
             <NuxtLink
