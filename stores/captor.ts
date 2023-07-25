@@ -10,8 +10,8 @@ export const useCaptorStore = defineStore("captor", {
         // get apiURL
         const api_url = useRuntimeConfig().public.API_URL;
 
-        //const response = await $fetch(`${api_url}/api/captor`);
-        //this.captor = response.payload.data;
+        const response = await $fetch(`${api_url}/api/captor`);
+        this.captor = response.payload.data;
         this.loading = false;
       } catch (error) {
         console.log("Error fetching data:", error);

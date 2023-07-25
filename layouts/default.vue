@@ -23,11 +23,13 @@ import {
   faCloud,
   faGaugeHigh,
   faHouseSignal,
+  faWind,
 } from "@fortawesome/free-solid-svg-icons";
 
 const itemNavbar: TNavbarItem[] = [
   { label: "Dashboard", path: "/", icon: faGaugeHigh },
   { label: "Weather", path: "/weather", icon: faCloud },
   { label: "Home sensor", path: "/house", icon: faHouseSignal },
+  { label: "Home consumption", path: "/captor", icon: faWind },
 ];
 </script>
