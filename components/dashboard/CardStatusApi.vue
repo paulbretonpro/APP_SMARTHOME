@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-white border rounded-lg flex gap-4 p-4 items-center">
+  <div
+    class="bg-white border rounded-lg overflow-hidden flex gap-4 p-4 items-center"
+  >
     <div class="border border-dashed rounded-sm p-2" :class="classes">
       <FontAwesomeIcon :icon="icon"></FontAwesomeIcon>
     </div>
