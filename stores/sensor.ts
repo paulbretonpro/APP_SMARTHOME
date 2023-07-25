@@ -11,10 +11,11 @@ export const useSensorStore = defineStore("sensor", {
         const api_url = useRuntimeConfig().public.API_URL;
 
         const response = await $fetch(`${api_url}/api/sensor`);
+        //TODO: delete settimeout
         setTimeout(() => {
           this.sensor = response.payload.data;
           this.loading = false;
-        }, 5000);
+        }, 1000);
       } catch (error) {
         console.log("Error fetching data:", error);
       }
