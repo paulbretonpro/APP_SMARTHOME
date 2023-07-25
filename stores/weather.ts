@@ -2,15 +2,17 @@ import { defineStore } from "pinia";
 import { TWeather } from "types/data";
 
 export const useWeatherStore = defineStore("weather", {
-  state: () => ({ weather: [] as TWeather[] }),
+  state: () => ({ weather: [] as TWeather[], loading: false }),
   actions: {
     async fetch() {
       try {
+        this.loading = true;
         // get apiURL
         const api_url = useRuntimeConfig().public.API_URL;
 
         const response = await $fetch(`${api_url}/api/weather`);
         this.weather = response.payload.data;
+        this.loading = false;
       } catch (error) {
         console.log("Error fetching data:", error);
       }
