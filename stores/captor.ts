@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
-import { TWeather } from "types/data";
+import { TCaptor } from "types/data";
 
-export const useWeatherStore = defineStore("weather", {
-  state: () => ({ weather: [] as TWeather[], loading: false }),
+export const useCaptorStore = defineStore("captor", {
+  state: () => ({ captor: [] as TCaptor[], loading: false }),
   actions: {
     async fetch() {
       try {
@@ -10,8 +10,8 @@ export const useWeatherStore = defineStore("weather", {
         // get apiURL
         const api_url = useRuntimeConfig().public.API_URL;
 
-        const response = await $fetch(`${api_url}/api/weather`);
-        this.weather = response.payload.data;
+        //const response = await $fetch(`${api_url}/api/captor`);
+        //this.captor = response.payload.data;
         this.loading = false;
       } catch (error) {
         console.log("Error fetching data:", error);
@@ -20,9 +20,9 @@ export const useWeatherStore = defineStore("weather", {
   },
   getters: {
     isActive: (state) => {
-      if (state.weather.length > 0) {
+      if (state.captor.length > 0) {
         const currentDate = new Date();
-        const lastRecord = new Date(state.weather[0].datetime);
+        const lastRecord = new Date(state.captor[0].datetime);
         const differenceBetweenHour =
           currentDate.getUTCHours() - lastRecord.getHours();
 

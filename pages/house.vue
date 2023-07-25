@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-4 justify-between mb-8">
+  <div class="flex gap-4 flex-wrap justify-between sm:mb-8">
     <div>
       <div class="font-bold text-3xl text-slate-800">Office sensor</div>
       <div class="text-slate-500">
@@ -8,7 +8,9 @@
     </div>
     <Button :left-icon="faRefresh" @click="handleRefresh">Refresh</Button>
   </div>
-  <Table :columns="columns" :data="sensor"></Table>
+  <InnerLoader :loading="loading">
+    <Table :columns="columns" :data="sensor"></Table>
+  </InnerLoader>
 </template>
 <script setup lang="ts">
 import { useSensorStore } from "~/stores/sensor";
@@ -24,6 +26,7 @@ const columns: TColumns[] = [
 ];
 
 const sensor = computed(() => store.sensor);
+const loading = computed(() => store.loading);
 
 const handleRefresh = async () => await store.fetch();
 </script>
