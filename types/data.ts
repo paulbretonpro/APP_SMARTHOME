@@ -21,3 +21,13 @@ export type TCaptor = {
   consumption: number;
   datetime: Date;
 };
+
+export type TExport = {
+  datetime: Date;
+  temperature_in: number;
+  temperature_out: number;
+  humidity_in: number;
+  humidity_out: number;
+  feels_like: number;
+  wind_speed: number;
+};
