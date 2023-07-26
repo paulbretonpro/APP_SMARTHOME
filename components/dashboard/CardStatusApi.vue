@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white border rounded-lg overflow-hidden flex gap-4 p-4 items-center"
+    class="bg-white border rounded-lg overflow-hidden flex gap-4 p-4 items-center cursor-pointer hover:shadow-sm hover:bg-slate-50"
   >
     <div class="border border-dashed rounded-sm p-2" :class="classes">
       <FontAwesomeIcon :icon="icon"></FontAwesomeIcon>
