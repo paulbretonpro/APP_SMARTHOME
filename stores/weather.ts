@@ -1,16 +1,21 @@
 import { defineStore } from "pinia";
 import { TWeather } from "types/data";
+import { TFilterDate } from "types/filters";
 
 export const useWeatherStore = defineStore("weather", {
   state: () => ({ weather: [] as TWeather[], loading: false }),
   actions: {
-    async fetch() {
+    async fetch(params?: TFilterDate) {
       try {
         this.loading = true;
         // get apiURL
         const api_url = useRuntimeConfig().public.API_URL;
 
-        const response = await $fetch(`${api_url}/api/weather`);
+        const response = await $fetch(`${api_url}/api/weather`, {
+          params: {
+            ...params,
+          },
+        });
         this.weather = response.payload.data;
         this.loading = false;
       } catch (error) {

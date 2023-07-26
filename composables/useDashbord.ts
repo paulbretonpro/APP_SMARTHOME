@@ -12,9 +12,18 @@ export const useDashbord = () => {
   const weatherStore = useWeatherStore();
   const captorStore = useCaptorStore();
 
+  const allSensor = computed(() => sensorStore.sensor);
+  const allWeather = computed(() => weatherStore.weather);
+
   // Fetch data
   useAsyncData("sensor", async () => await sensorStore.fetch());
-  useAsyncData("weather", async () => await await weatherStore.fetch());
+  useAsyncData(
+    "weather",
+    async () =>
+      await await weatherStore.fetch({
+        date: $dayjs().format("YYYY-MM-DD"),
+      })
+  );
   useAsyncData("captor", async () => await captorStore.fetch());
 
   // Variables active api
@@ -90,5 +99,7 @@ export const useDashbord = () => {
     handleGoToSensorPage,
     handleGoToCaptorPage,
     fetchExport,
+    allSensor,
+    allWeather,
   };
 };
