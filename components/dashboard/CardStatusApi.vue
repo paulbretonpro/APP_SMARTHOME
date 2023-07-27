@@ -10,11 +10,7 @@
         API {{ api }}
       </div>
       <div class="italic text-sm text-gray-500 whitespace-nowrap">
-        {{
-          lastRecord !== null
-            ? $dayjs(lastRecord).format("DD/MM/YYYY hh:mm:ss")
-            : "No registration"
-        }}
+        {{ lastRecord !== null ? fullDate(lastRecord) : "No registration" }}
       </div>
     </div>
   </div>
@@ -23,7 +19,7 @@
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faCheck, faX } from "@fortawesome/free-solid-svg-icons";
 
-const { $dayjs } = useNuxtApp();
+const { fullDate } = useDate();
 
 const props = defineProps<{
   api: string;

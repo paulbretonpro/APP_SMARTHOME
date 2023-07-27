@@ -4,4 +4,5 @@ export type TFilterDate = {
   date_end?: Date | string;
   orderBy?: "asc" | "desc";
   page?: number;
+  perPage?: number;
 };
