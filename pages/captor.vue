@@ -27,5 +27,8 @@ const columns: TColumns[] = [
 const captor = computed(() => store.captor);
 const loading = computed(() => store.loading);
 
-const handleRefresh = async () => await store.fetch();
+const handleRefresh = async () =>
+  await store.fetch({
+    orderBy: "desc",
+  });
 </script>

@@ -1,16 +1,21 @@
 import { defineStore } from "pinia";
 import { TCaptor } from "types/data";
+import { TFilterDate } from "types/filters";
 
 export const useCaptorStore = defineStore("captor", {
   state: () => ({ captor: [] as TCaptor[], loading: false }),
   actions: {
-    async fetch() {
+    async fetch(params: TFilterDate) {
       try {
         this.loading = true;
         // get apiURL
         const api_url = useRuntimeConfig().public.API_URL;
 
-        const response = await $fetch(`${api_url}/api/captor`);
+        const response = await $fetch(`${api_url}/api/captor`, {
+          params: {
+            ...params,
+          },
+        });
         this.captor = response.payload.data;
         this.loading = false;
       } catch (error) {

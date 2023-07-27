@@ -1,11 +1,19 @@
 export const useDate = () => {
-  const getHours = (date: Date) =>
-    date.getHours() >= 10
-      ? date.getHours() + "h00"
-      : "0" + date.getHours() + "h00";
+  const usableDate = (date: string | Date): Date => new Date(date);
 
-  const getDate = (date: Date) =>
-    date.getFullYear() + "/" + getMonth(date) + "/" + getDay(date);
+  const getHours = (date: string | Date) => {
+    const dateUse = usableDate(date);
+    return dateUse.getHours() >= 10
+      ? dateUse.getHours() + "h00"
+      : "0" + dateUse.getHours() + "h00";
+  };
+
+  const getDate = (date: string | Date) => {
+    const dateUse = usableDate(date);
+    return (
+      dateUse.getFullYear() + "/" + getMonth(dateUse) + "/" + getDay(dateUse)
+    );
+  };
 
   const getMonth = (date: Date) =>
     date.getMonth() >= 10 ? date.getMonth() + 1 : "0" + (date.getMonth() + 1);
@@ -14,13 +22,30 @@ export const useDate = () => {
     date.getDate() >= 10 ? date.getDate() : "0" + date.getDate();
 
   const fullDate = (date: Date | string) => {
-    const dateTz = new Date(date);
-    return getDate(dateTz) + " " + getHours(dateTz);
+    return getDate(date) + " " + getHours(date);
   };
+
+  const todayUTC = computed(() => {
+    const current00 = new Date();
+    const current23 = new Date();
+    current00.setHours(0);
+    current00.setMinutes(0);
+    current00.setSeconds(0);
+
+    current23.setHours(23);
+    current23.setMinutes(0);
+    current23.setSeconds(0);
+
+    return {
+      start: current00.toISOString(),
+      end: current23.toISOString(),
+    };
+  });
 
   return {
     fullDate,
     getHours,
     getDate,
+    todayUTC,
   };
 };

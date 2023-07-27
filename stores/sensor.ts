@@ -1,21 +1,23 @@
 import { defineStore } from "pinia";
 import { TSensor } from "../types/data";
+import { TFilterDate } from "../types/filters";
 
 export const useSensorStore = defineStore("sensor", {
   state: () => ({ sensor: [] as TSensor[], loading: false }),
   actions: {
-    async fetch() {
+    async fetch(params: TFilterDate) {
       try {
         // get apiURL
         this.loading = true;
         const api_url = useRuntimeConfig().public.API_URL;
 
-        const response = await $fetch(`${api_url}/api/sensor`);
-        //TODO: delete settimeout
-        setTimeout(() => {
-          this.sensor = response.payload.data;
-          this.loading = false;
-        }, 1000);
+        const response = await $fetch(`${api_url}/api/sensor`, {
+          params: {
+            ...params,
+          },
+        });
+        this.sensor = response.payload.data;
+        this.loading = false;
       } catch (error) {
         console.log("Error fetching data:", error);
       }

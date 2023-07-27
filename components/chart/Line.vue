@@ -1,5 +1,5 @@
 <template>
-  <div class="h-96">
+  <div class="h-96 w-fit">
     <Line :data="chartData" :options="chartOptions"></Line>
   </div>
 </template>
@@ -15,7 +15,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { TSensor } from "types/data";
+import { TCaptor, TSensor, TWeather } from "types/data";
 
 ChartJS.register(
   CategoryScale,
@@ -28,18 +28,15 @@ ChartJS.register(
 );
 
 const props = defineProps<{
-  data: TSensor[];
-  labelName: string;
+  data: TSensor[] | TWeather[] | TCaptor[];
   dataName: string;
 }>();
 
-const { $dayjs } = useNuxtApp();
+const { getHours } = useDate();
 
 const chartData = computed(() => {
   return {
-    labels: props.data.map(
-      (data) => $dayjs.utc(data[props.labelName]).format("ddd DD hh") + "h"
-    ),
+    labels: props.data.map((data) => getHours(data.datetime)),
     datasets: [
       {
         label: props.dataName,

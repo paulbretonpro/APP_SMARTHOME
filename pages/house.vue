@@ -28,5 +28,8 @@ const columns: TColumns[] = [
 const sensor = computed(() => store.sensor);
 const loading = computed(() => store.loading);
 
-const handleRefresh = async () => await store.fetch();
+const handleRefresh = async () =>
+  await store.fetch({
+    orderBy: "desc",
+  });
 </script>
