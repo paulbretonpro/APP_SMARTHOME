@@ -42,10 +42,20 @@ export const useDate = () => {
     };
   });
 
+  const isBetweenNowAndLessTwoHours = (date: string | Date) => {
+    const lastRecordHour = new Date(date).getHours();
+    const currentHour = new Date().getHours();
+    const currentLessTwoHours = currentHour - 2;
+    return (
+      currentLessTwoHours < lastRecordHour && lastRecordHour <= currentHour
+    );
+  };
+
   return {
     fullDate,
     getHours,
     getDate,
     todayUTC,
+    isBetweenNowAndLessTwoHours,
   };
 };

@@ -2,6 +2,8 @@ import { defineStore } from "pinia";
 import { TWeather } from "types/data";
 import { TFilterDate } from "types/filters";
 
+const { isBetweenNowAndLessTwoHours } = useDate();
+
 export const useWeatherStore = defineStore("weather", {
   state: () => ({ weather: [] as TWeather[], loading: false }),
   actions: {
@@ -25,13 +27,12 @@ export const useWeatherStore = defineStore("weather", {
   },
   getters: {
     isActive: (state) => {
-      if (state.weather.length > 0) {
-        const currentDate = new Date();
-        const lastRecord = new Date(state.weather[0].datetime);
-        const differenceBetweenHour =
-          currentDate.getUTCHours() - lastRecord.getHours();
-
-        return { status: differenceBetweenHour === 0, lastUpdate: lastRecord };
+      const last = state.weather.pop() || null;
+      if (state.weather.length > 0 && last) {
+        return {
+          status: isBetweenNowAndLessTwoHours(last.datetime),
+          lastUpdate: last.datetime,
+        };
       } else {
         return { status: false, lastUpdate: null };
       }
