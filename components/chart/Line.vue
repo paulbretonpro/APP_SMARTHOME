@@ -53,7 +53,9 @@ const chartOptions = ref({
   maintainAspectRatio: false,
   scales: {
     y: {
-      stepSize: 0.5,
+      ticks: {
+        stepSize: 0.5,
+      },
     },
   },
 });
