@@ -31,4 +31,6 @@ const handleRefresh = async () =>
   await store.fetch({
     orderBy: "desc",
   });
+
+await handleRefresh();
 </script>
