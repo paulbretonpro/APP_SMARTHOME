@@ -32,6 +32,7 @@ export const useDashbord = () => {
       await await weatherStore.fetch({
         date_start: todayUTC.value.start,
         date_end: todayUTC.value.end,
+        perPage: 24,
       })
   );
   useAsyncData(

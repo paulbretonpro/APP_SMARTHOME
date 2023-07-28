@@ -51,5 +51,10 @@ const chartData = computed(() => {
 const chartOptions = ref({
   responsive: true,
   maintainAspectRatio: false,
+  scales: {
+    y: {
+      stepSize: 0.5,
+    },
+  },
 });
 </script>
