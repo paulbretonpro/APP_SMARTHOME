@@ -42,10 +42,18 @@
   </InnerLoader>
   <div class="flex flex-wrap flex-col gap-4 lg:flex-row">
     <DashboardCardChart title="Temperature inside home">
-      <ChartLine :data="allSensor" data-name="temperature"></ChartLine>
+      <ChartLine
+        v-if="allSensor.length > 0"
+        :data="allSensor"
+        data-name="temperature"
+      ></ChartLine>
     </DashboardCardChart>
     <DashboardCardChart title="Temperature outside home">
-      <ChartLine :data="allWeather" data-name="temperature"></ChartLine>
+      <ChartLine
+        v-if="allWeather.length > 0"
+        :data="allWeather"
+        data-name="temperature"
+      ></ChartLine>
     </DashboardCardChart>
   </div>
 </template>
