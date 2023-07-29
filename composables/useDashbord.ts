@@ -6,16 +6,42 @@ import { TExport } from "types/data";
 export const useDashbord = () => {
   const router = useRouter();
   const { $dayjs } = useNuxtApp();
+  const { todayUTC } = useDate();
 
   // Init store
   const sensorStore = useSensorStore();
   const weatherStore = useWeatherStore();
   const captorStore = useCaptorStore();
 
+  const allSensor = computed(() => sensorStore.sensor);
+  const allWeather = computed(() => weatherStore.weather);
+
   // Fetch data
-  useAsyncData("sensor", async () => await sensorStore.fetch());
-  useAsyncData("weather", async () => await await weatherStore.fetch());
-  useAsyncData("captor", async () => await captorStore.fetch());
+  useAsyncData(
+    "sensor",
+    async () =>
+      await sensorStore.fetch({
+        date_start: todayUTC.value.start,
+        date_end: todayUTC.value.end,
+        perPage: 24,
+      })
+  );
+  useAsyncData(
+    "weather",
+    async () =>
+      await await weatherStore.fetch({
+        date_start: todayUTC.value.start,
+        date_end: todayUTC.value.end,
+        perPage: 24,
+      })
+  );
+  useAsyncData(
+    "captor",
+    async () =>
+      await captorStore.fetch({
+        orderBy: "desc",
+      })
+  );
 
   // Variables active api
   const sensorApiIsActive = computed(() => sensorStore.isActive);
@@ -90,5 +116,8 @@ export const useDashbord = () => {
     handleGoToSensorPage,
     handleGoToCaptorPage,
     fetchExport,
+    allSensor,
+    allWeather,
+    todayUTC,
   };
 };

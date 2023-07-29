@@ -1,9 +1,7 @@
 <template>
-  <div class="h-screen flex">
-    <div class="side-bar flex-nowrap h-full bg-indigo-500">
-      <layoutNavbar :routes="itemNavbar"></layoutNavbar>
-    </div>
-    <div class="content flex-1 p-8 overflow-auto bg-gray-50">
+  <div>
+    <LayoutMenuBurger :routes="itemNavbar"></LayoutMenuBurger>
+    <div class="pt-8 px-4">
       <slot />
     </div>
   </div>

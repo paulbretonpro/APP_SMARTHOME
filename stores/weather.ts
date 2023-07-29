@@ -1,16 +1,23 @@
 import { defineStore } from "pinia";
 import { TWeather } from "types/data";
+import { TFilterDate } from "types/filters";
+
+const { isBetweenNowAndLessTwoHours } = useDate();
 
 export const useWeatherStore = defineStore("weather", {
   state: () => ({ weather: [] as TWeather[], loading: false }),
   actions: {
-    async fetch() {
+    async fetch(params?: TFilterDate) {
       try {
         this.loading = true;
         // get apiURL
         const api_url = useRuntimeConfig().public.API_URL;
 
-        const response = await $fetch(`${api_url}/api/weather`);
+        const response = await $fetch(`${api_url}/api/weather`, {
+          params: {
+            ...params,
+          },
+        });
         this.weather = response.payload.data;
         this.loading = false;
       } catch (error) {
@@ -20,13 +27,12 @@ export const useWeatherStore = defineStore("weather", {
   },
   getters: {
     isActive: (state) => {
-      if (state.weather.length > 0) {
-        const currentDate = new Date();
-        const lastRecord = new Date(state.weather[0].datetime);
-        const differenceBetweenHour =
-          currentDate.getUTCHours() - lastRecord.getHours();
-
-        return { status: differenceBetweenHour === 0, lastUpdate: lastRecord };
+      const last = state.weather.pop() || null;
+      if (state.weather.length > 0 && last) {
+        return {
+          status: isBetweenNowAndLessTwoHours(last.datetime),
+          lastUpdate: last.datetime,
+        };
       } else {
         return { status: false, lastUpdate: null };
       }

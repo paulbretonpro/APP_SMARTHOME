@@ -30,5 +30,10 @@ const columns: TColumns[] = [
 
 const weather = computed(() => store.weather);
 
-const handleRefresh = async () => await store.fetch();
+const handleRefresh = async () =>
+  await store.fetch({
+    orderBy: "desc",
+  });
+
+await handleRefresh();
 </script>

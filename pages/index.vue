@@ -1,5 +1,5 @@
 <template>
-  <InnerLoader :loading="exportLoading" classes="h-full">
+  <InnerLoader :loading="exportLoading">
     <div class="text-4xl text-slate-600 font-extrabold">Dashbord</div>
     <div class="text-gray-400 mb-8">
       Dashboard for viewing api endpoint status
@@ -33,13 +33,29 @@
     <div class="my-12 flex flex-wrap justify-between">
       <div>
         <div class="text-4xl text-slate-600 font-extrabold">Export data</div>
-        <div class="text-gray-400 mb-8">Export data to a csv file</div>
+        <div class="text-gray-400">Export data to a csv file</div>
       </div>
       <Button :left-icon="faDownload" @click="handleCreateExport"
         >Export</Button
       >
     </div>
   </InnerLoader>
+  <div class="flex flex-wrap flex-col gap-4 lg:flex-row">
+    <DashboardCardChart title="Temperature inside home">
+      <ChartLine
+        v-if="allSensor.length > 0"
+        :data="allSensor"
+        data-name="temperature"
+      ></ChartLine>
+    </DashboardCardChart>
+    <DashboardCardChart title="Temperature outside home">
+      <ChartLine
+        v-if="allWeather.length > 0"
+        :data="allWeather"
+        data-name="temperature"
+      ></ChartLine>
+    </DashboardCardChart>
+  </div>
 </template>
 <script setup lang="ts">
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
@@ -56,6 +72,8 @@ const {
   handleGoToSensorPage,
   handleGoToWeatherPage,
   fetchExport,
+  allSensor,
+  allWeather,
 } = useDashbord();
 
 const handleCreateExport = async () => await fetchExport();

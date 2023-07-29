@@ -50,6 +50,7 @@ const props = defineProps<{
   data: Array<TWeather | TSensor | TCaptor>;
 }>();
 
+const { fullDate } = useDate();
 /**
  * Get the value by column namex
  *
@@ -61,6 +62,7 @@ const matchColumnData = (
   columnIndex: number
 ) => {
   const columnName = props.columns[columnIndex] as TColumns;
+  if (columnName.name === "datetime") return fullDate(data[columnName.name]);
   return data[columnName.name];
 };
 </script>
