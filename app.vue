@@ -1,12 +1,12 @@
 <template>
   <div>
-    <NuxtLayout>
-      <ClientOnly>
-        <template #fallback>
-          <InnerLoader loading classes="h-full"></InnerLoader>
-        </template>
-        <NuxtPage />
-      </ClientOnly>
+    <NuxtLayout :name="layout">
+      <NuxtPage />
     </NuxtLayout>
   </div>
 </template>
+<script setup lang="ts">
+const { isMobile } = useDevice();
+
+const layout = isMobile ? "mobile" : "default";
+</script>

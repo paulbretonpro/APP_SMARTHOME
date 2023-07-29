@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     "@/assets/css/main.css",
     "@fortawesome/fontawesome-svg-core/styles.css",
   ],
-  modules: ["@pinia/nuxt"],
+  modules: ["@pinia/nuxt", "@nuxtjs/device"],
   postcss: {
     plugins: {
       tailwindcss: {},
