@@ -54,7 +54,7 @@
 
   <Pagination
     :current="page"
-    :total="responses?.payload?.total"
+    :total="responses?.payload.total"
     @previous-page="handlePrevious"
     @next-page="handleNext"
   ></Pagination>
@@ -92,7 +92,7 @@ const { pending, data: responses } = await useLazyAsyncData(
       return {
         payload: {
           data: [],
-          total: 0,
+          total: 1,
         },
       };
     },
@@ -100,10 +100,7 @@ const { pending, data: responses } = await useLazyAsyncData(
 );
 
 const handleRefresh = () => (page.value = 1);
-const handleNext = () => {
-  console.log("next");
-  page.value += 1;
-};
+const handleNext = () => (page.value += 1);
 const handlePrevious = () => (page.value -= 1);
 
 /**
