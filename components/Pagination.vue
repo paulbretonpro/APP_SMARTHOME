@@ -30,10 +30,15 @@ import {
   faArrowRightLong,
 } from "@fortawesome/free-solid-svg-icons";
 
-const props = defineProps<{
-  current: number;
-  total: number;
-}>();
+const props = withDefaults(
+  defineProps<{
+    current: number;
+    total?: number;
+  }>(),
+  {
+    total: 1,
+  }
+);
 
 const emit = defineEmits(["next-page", "previous-page"]);
 
