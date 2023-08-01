@@ -76,7 +76,11 @@ const api_url = useRuntimeConfig().public.API_URL;
 
 const page = ref(1);
 
-const { pending, data: responses } = await useLazyAsyncData(
+const {
+  pending,
+  data: responses,
+  refresh,
+} = await useLazyAsyncData(
   props.api,
   () =>
     $fetch(`${api_url}/api/${props.api}`, {
@@ -99,7 +103,10 @@ const { pending, data: responses } = await useLazyAsyncData(
   }
 );
 
-const handleRefresh = () => (page.value = 1);
+const handleRefresh = () => {
+  page.value = 1;
+  refresh();
+};
 const handleNext = () => (page.value += 1);
 const handlePrevious = () => (page.value -= 1);
 
