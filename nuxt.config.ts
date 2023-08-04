@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     public: {
       API_URL:
         process.env.NODE_ENV === "production"
-          ? "https://uv2wkedf2htdl3hjuhlt26kgxy0fdxid.lambda-url.us-east-1.on.aws"
+          ? "http://165.232.174.155:80"
           : "http://localhost:80",
     },
   },
