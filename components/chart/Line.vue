@@ -30,6 +30,7 @@ ChartJS.register(
 const props = defineProps<{
   data: TSensor[] | TWeather[] | TCaptor[];
   dataName: string;
+  label?: string;
 }>();
 
 const { getHours } = useDate();
@@ -39,7 +40,7 @@ const chartData = computed(() => {
     labels: props.data.map((data) => getHours(data.datetime)),
     datasets: [
       {
-        label: props.dataName,
+        label: props.label || "",
         backgroundColor: "#f87979",
         data: props.data.map((data) => data[props.dataName]),
         tension: 0.2,

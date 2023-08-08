@@ -2,6 +2,8 @@ import { defineStore } from "pinia";
 import { TCaptor } from "types/data";
 import { TFilterDate } from "types/filters";
 
+const { isBetweenNowAndLessTwoHours } = useDate();
+
 export const useCaptorStore = defineStore("captor", {
   state: () => ({ captor: [] as TCaptor[], loading: false }),
   actions: {
@@ -25,13 +27,14 @@ export const useCaptorStore = defineStore("captor", {
   },
   getters: {
     isActive: (state) => {
-      if (state.captor.length > 0) {
-        const currentDate = new Date();
-        const lastRecord = new Date(state.captor[0].datetime);
-        const differenceBetweenHour =
-          currentDate.getUTCHours() - lastRecord.getHours();
+      const copyState = [...state.captor];
+      const last = copyState.pop() || null;
 
-        return { status: differenceBetweenHour === 0, lastUpdate: lastRecord };
+      if (state.captor.length > 0 && last) {
+        return {
+          status: isBetweenNowAndLessTwoHours(last.datetime),
+          lastUpdate: last.datetime,
+        };
       } else {
         return { status: false, lastUpdate: null };
       }

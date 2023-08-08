@@ -15,6 +15,7 @@ export const useDashbord = () => {
 
   const allSensor = computed(() => sensorStore.sensor);
   const allWeather = computed(() => weatherStore.weather);
+  const allCaptor = computed(() => captorStore.captor);
 
   // Fetch data
   useAsyncData(
@@ -39,7 +40,9 @@ export const useDashbord = () => {
     "captor",
     async () =>
       await captorStore.fetch({
-        orderBy: "desc",
+        date_start: todayUTC.value.start,
+        date_end: todayUTC.value.end,
+        perPage: 24,
       })
   );
 
@@ -118,6 +121,7 @@ export const useDashbord = () => {
     fetchExport,
     allSensor,
     allWeather,
+    allCaptor,
     todayUTC,
   };
 };

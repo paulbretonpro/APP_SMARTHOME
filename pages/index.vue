@@ -46,6 +46,7 @@
         v-if="allSensor.length > 0"
         :data="allSensor"
         data-name="temperature"
+        label="Temperature (°C)"
       ></ChartLine>
     </DashboardCardChart>
     <DashboardCardChart title="Temperature outside home">
@@ -53,6 +54,15 @@
         v-if="allWeather.length > 0"
         :data="allWeather"
         data-name="temperature"
+        label="Temperature (°C)"
+      ></ChartLine>
+    </DashboardCardChart>
+    <DashboardCardChart title="Consumption energy">
+      <ChartLine
+        v-if="allCaptor.length > 0"
+        :data="allCaptor"
+        data-name="consumption"
+        label="Consumption (W)"
       ></ChartLine>
     </DashboardCardChart>
   </div>
@@ -74,6 +84,7 @@ const {
   fetchExport,
   allSensor,
   allWeather,
+  allCaptor,
 } = useDashbord();
 
 const handleCreateExport = async () => await fetchExport();
