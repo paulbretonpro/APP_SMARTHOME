@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     public: {
       API_URL:
         process.env.NODE_ENV === "production"
-          ? "http://165.232.174.155:80"
+          ? "http://192.168.50.179:80"
           : "http://localhost:80",
     },
   },
