@@ -27,7 +27,9 @@ export const useWeatherStore = defineStore("weather", {
   },
   getters: {
     isActive: (state) => {
-      const last = state.weather.pop() || null;
+      const copyState = [...state.weather];
+      const last = copyState.pop() || null;
+
       if (state.weather.length > 0 && last) {
         return {
           status: isBetweenNowAndLessTwoHours(last.datetime),

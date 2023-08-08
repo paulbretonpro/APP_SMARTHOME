@@ -27,7 +27,9 @@ export const useSensorStore = defineStore("sensor", {
   },
   getters: {
     isActive: (state) => {
-      const last = state.sensor.pop() || null;
+      const copyState = [...state.sensor];
+      const last = copyState.pop() || null;
+
       if (state.sensor.length > 0 && last) {
         return {
           status: isBetweenNowAndLessTwoHours(last.datetime),

@@ -25,6 +25,7 @@ export const useDashbord = () => {
         date_start: todayUTC.value.start,
         date_end: todayUTC.value.end,
         perPage: 24,
+        orderBy: "asc",
       })
   );
   useAsyncData(
@@ -34,6 +35,7 @@ export const useDashbord = () => {
         date_start: todayUTC.value.start,
         date_end: todayUTC.value.end,
         perPage: 24,
+        orderBy: "asc",
       })
   );
   useAsyncData(
@@ -43,6 +45,7 @@ export const useDashbord = () => {
         date_start: todayUTC.value.start,
         date_end: todayUTC.value.end,
         perPage: 24,
+        orderBy: "asc",
       })
   );
 
