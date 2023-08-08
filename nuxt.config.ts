@@ -20,7 +20,10 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      API_URL: "http://192.168.0.101:80"
+      API_URL:
+        process.env.NODE_ENV === "production"
+          ? "http://192.168.50.179:80"
+          : "http://localhost:80",
     },
   },
 });
