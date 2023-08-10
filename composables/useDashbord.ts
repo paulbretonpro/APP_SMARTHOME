@@ -18,7 +18,7 @@ export const useDashbord = () => {
   const allCaptor = computed(() => captorStore.captor);
 
   // Fetch data
-  useAsyncData(
+  const { refresh: refreshSensor } = useAsyncData(
     "sensor",
     async () =>
       await sensorStore.fetch({
@@ -28,7 +28,7 @@ export const useDashbord = () => {
         orderBy: "asc",
       })
   );
-  useAsyncData(
+  const { refresh: refreshWeather } = useAsyncData(
     "weather",
     async () =>
       await await weatherStore.fetch({
@@ -38,7 +38,7 @@ export const useDashbord = () => {
         orderBy: "asc",
       })
   );
-  useAsyncData(
+  const { refresh: refreshCaptor } = useAsyncData(
     "captor",
     async () =>
       await captorStore.fetch({
@@ -48,6 +48,12 @@ export const useDashbord = () => {
         orderBy: "asc",
       })
   );
+
+  const handleRefresh = () => {
+    refreshCaptor();
+    refreshSensor();
+    refreshWeather();
+  };
 
   // Variables active api
   const sensorApiIsActive = computed(() => sensorStore.isActive);
@@ -126,5 +132,6 @@ export const useDashbord = () => {
     allWeather,
     allCaptor,
     todayUTC,
+    handleRefresh,
   };
 };

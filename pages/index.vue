@@ -1,8 +1,13 @@
 <template>
   <InnerLoader :loading="exportLoading">
-    <div class="text-4xl text-slate-600 font-extrabold">Dashbord</div>
-    <div class="text-gray-400 mb-8">
-      Dashboard for viewing api endpoint status
+    <div class="flex gap-4 justify-between">
+      <div>
+        <div class="text-4xl text-slate-600 font-extrabold">Dashbord</div>
+        <div class="text-gray-400 mb-8">
+          Dashboard for viewing api endpoint status
+        </div>
+      </div>
+      <Button :left-icon="faRefresh" @click="handleRefresh">Refresh</Button>
     </div>
     <div class="flex flex-col sm:flex-row flex-wrap gap-4">
       <InnerLoader :loading="sensorLoading">
@@ -68,7 +73,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faRefresh } from "@fortawesome/free-solid-svg-icons";
 
 const {
   captorApiIsActive,
@@ -85,6 +90,7 @@ const {
   allSensor,
   allWeather,
   allCaptor,
+  handleRefresh,
 } = useDashbord();
 
 const handleCreateExport = async () => await fetchExport();

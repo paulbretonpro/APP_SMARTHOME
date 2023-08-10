@@ -10,6 +10,7 @@
 import { TColumns } from "types/data";
 
 const columns: TColumns[] = [
+  { label: "Delete", name: "id" },
   { label: "Consumption (kW)", name: "consumption" },
   { label: "Datetime", name: "datetime" },
 ];
