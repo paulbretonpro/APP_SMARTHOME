@@ -182,7 +182,6 @@ const matchColumnData = (
   data: TWeather | TSensor | TCaptor,
   columnIndex: number
 ) => {
-  // skip id column
   const columnName = props.columns[columnIndex] as TColumns;
   if (columnName.name === "datetime") return fullDate(data[columnName.name]);
   return data[columnName.name];
