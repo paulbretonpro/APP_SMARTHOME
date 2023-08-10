@@ -7,6 +7,8 @@
         white,
       'border border-transparent text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500':
         !white,
+      'border border-red-500 text-white-700 bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500':
+        red,
       'cursor-not-allowed opacity-70': disabled,
     }"
   >
@@ -25,6 +27,7 @@ defineProps<{
   leftIcon?: IconDefinition;
   rightIcon?: IconDefinition;
   white?: boolean;
+  red?: boolean;
   disabled?: boolean;
 }>();
 </script>

@@ -1,4 +1,3 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
 <template>
   <div class="flex gap-4 flex-wrap justify-between sm:mb-8">
     <div>
@@ -7,7 +6,20 @@
         <slot name="desc">{{ desc }}</slot>
       </div>
     </div>
-    <Button :left-icon="faRefresh" @click="handleRefresh">Refresh</Button>
+
+    <div class="flex gap-4">
+      <InnerLoader :loading="loadSync">
+        <Button white :left-icon="faRefresh" @click="handleSync"
+          >Synchronise</Button
+        >
+      </InnerLoader>
+      <Button :left-icon="faRefresh" @click="handleRefresh">Refresh</Button>
+    </div>
+  </div>
+  <div v-if="selected.length" class="mt-4">
+    <Button red @click="handleDelete"
+      >Delete : {{ selected.length }} row(s)</Button
+    >
   </div>
   <InnerLoader :loading="pending">
     <div class="flex flex-col">
@@ -29,17 +41,29 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
-              <tr v-for="(d, index) in responses?.payload.data" :key="index">
+              <tr
+                v-for="(d, index) in responses?.payload?.data"
+                :key="index"
+                @click="handleSelect(d.id)"
+                class="cursor-pointer"
+              >
                 <td
                   v-for="(pos, idx) in Object.entries(d).length"
                   :key="idx"
                   class="whitespace-nowrap pl-4 pr-3 py-4 text-sm text-gray-500"
                 >
-                  {{ matchColumnData(d, idx) }}
+                  <input
+                    v-if="pos === 1"
+                    :value="d.id"
+                    v-model="selected"
+                    type="checkbox"
+                    class="focus:ring-indigo-500 h-4 w-4 border-gray-300 rounded checked:text-indigo-600"
+                  />
+                  <span v-else>{{ matchColumnData(d, idx) }}</span>
                 </td>
               </tr>
             </tbody>
-            <tfoot v-if="responses?.payload.data.length === 0">
+            <tfoot v-if="responses?.payload?.data?.length === 0">
               <tr class="font-bold text-sm text-slate-600">
                 <td colspan="100" class="text-center py-4">
                   No data available ... Please refresh
@@ -54,7 +78,7 @@
 
   <Pagination
     :current="page"
-    :total="responses?.payload.total"
+    :total="responses?.payload?.total"
     @previous-page="handlePrevious"
     @next-page="handleNext"
   ></Pagination>
@@ -75,7 +99,18 @@ const { fullDate } = useDate();
 const api_url = useRuntimeConfig().public.API_URL;
 
 const page = ref(1);
+const loadSync = ref(false);
 
+const selected = ref<number[]>([]);
+
+const handleSelect = (id: number) => {
+  if (selected.value.includes(id)) {
+    const index = selected.value.findIndex((current: number) => current === id);
+    selected.value.splice(index, 1);
+  } else {
+    selected.value.push(id);
+  }
+};
 const {
   pending,
   data: responses,
@@ -105,10 +140,37 @@ const {
 
 const handleRefresh = () => {
   page.value = 1;
+  selected.value = [];
   refresh();
 };
 const handleNext = () => (page.value += 1);
 const handlePrevious = () => (page.value -= 1);
+
+const handleSync = async () => {
+  loadSync.value = true;
+  await useLazyAsyncData(props.api, () =>
+    $fetch(`${api_url}/api/sync?${props.api}=1`, {
+      params: {
+        since_last: 1,
+      },
+    })
+  );
+  await refresh();
+  loadSync.value = false;
+};
+
+const handleDelete = async () => {
+  await useLazyAsyncData(props.api, () =>
+    $fetch(`${api_url}/api/${props.api}`, {
+      method: "DELETE",
+      params: {
+        "ids[]": selected.value,
+      },
+    })
+  );
+  selected.value = [];
+  await refresh();
+};
 
 /**
  * Get the value by column namex
@@ -120,6 +182,7 @@ const matchColumnData = (
   data: TWeather | TSensor | TCaptor,
   columnIndex: number
 ) => {
+  // skip id column
   const columnName = props.columns[columnIndex] as TColumns;
   if (columnName.name === "datetime") return fullDate(data[columnName.name]);
   return data[columnName.name];
