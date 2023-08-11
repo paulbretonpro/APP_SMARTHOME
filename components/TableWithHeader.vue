@@ -9,7 +9,7 @@
 
     <div class="flex gap-4">
       <InnerLoader :loading="loadSync">
-        <Button white :left-icon="faRefresh" @click="handleSync"
+        <Button white :left-icon="faServer" @click="handleSync"
           >Synchronise</Button
         >
       </InnerLoader>
@@ -85,7 +85,7 @@
 </template>
 
 <script setup lang="ts">
-import { faRefresh } from "@fortawesome/free-solid-svg-icons";
+import { faRefresh, faServer } from "@fortawesome/free-solid-svg-icons";
 import { TCaptor, TColumns, TSensor, TWeather } from "~/types/data";
 
 const props = defineProps<{
