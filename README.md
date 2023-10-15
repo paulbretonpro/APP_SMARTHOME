@@ -1,6 +1,7 @@
-# Nuxt 3 Minimal Starter
+# APP Smarthome
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+App Smarthome is a dashboard for viewing the status of data and exporting a file with usable data.
+This project was developed using the Nuxt 3 framework.
 
 ## Setup
 
@@ -17,47 +18,9 @@ pnpm install
 yarn install
 ```
 
-## Development Server
+## Authors
 
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Do not hesitate to contact me at the address :
+- paul.breton.dev@gmail.com
+- [@paulbretonpro](https://www.github.com/paulbretonpro)
+    
