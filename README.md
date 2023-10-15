@@ -18,6 +18,13 @@ pnpm install
 yarn install
 ```
 
+## Start
+
+```bash
+# npm
+npm run dev
+```
+
 ## Authors
 
 Do not hesitate to contact me at the address :
